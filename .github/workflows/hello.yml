@@ -16,4 +16,17 @@ jobs:
           format: html
           disable_web_page_preview: true
           message: |
-            ➡️ Deploy initiated
+            ➡️ Deploy started
+      
+      - name: Deploy application on remote server
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          port: ${{ secrets.PROD_PORT }}
+          username: ${{ secrets.PROD_USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          key: ${{ secrets.SSH_KEY }}
+          script_stop: true
+          script: |
+            cd /var/app/olala
+            echo "I was here" >> test.md
