@@ -1,21 +1,22 @@
-FROM node:20.19.0-alpine AS builder
-
-RUN mkdir /app && mkdir /app/data
-
-COPY . /app
-
-RUN cd /app && npm install && npm run build
-
-FROM node:20.19.0-alpine
-
-RUN mkdir /app
-
-COPY --from=builder /app/build /app/build
-COPY --from=builder /app/package.json /app/package-lock.json /app/
-
-RUN cd /app && \
-  npm install --production
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-CMD ["node", "build/index.js"]
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/package*.json ./
+
+RUN npm install --omit=dev
+
+EXPOSE 3000
+
+CMD ["node", "build"]
