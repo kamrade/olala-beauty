@@ -1,4 +1,5 @@
 <script lang="ts">
+	console.log("Start");
 </script>
 
 <div class="mx-auto container">
