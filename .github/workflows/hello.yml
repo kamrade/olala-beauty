@@ -30,3 +30,4 @@ jobs:
           script: |
             cd /var/app/olala
             echo "I was here" >> test.md
+            sh ./rebuild-rerun.sh
