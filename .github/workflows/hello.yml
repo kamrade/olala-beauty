@@ -29,7 +29,7 @@ jobs:
           script_stop: true
           script: |
             cd /var/app/olala
-            echo "I was here" >> log.md
+            echo "I was here at $(date '+%Y-%m-%d %H:%M:%S')" >> log.md
             sh ./rebuild-rerun.sh
 
       - name: The deploy has failed
