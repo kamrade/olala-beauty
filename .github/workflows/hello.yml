@@ -16,7 +16,7 @@ jobs:
           format: html
           disable_web_page_preview: true
           message: |
-            ➡️ Deploy started: Olala
+            ➡️ Deploy started: Olala.beauty
       
       - name: Deploy application on remote server
         uses: appleboy/ssh-action@v1.1.0
